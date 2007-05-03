@@ -6,7 +6,7 @@
 Summary:	Firebird database module for PHP
 Name:		php-%{modname}
 Epoch:		3
-Version:	5.2.1
+Version:	5.2.2
 Release:	%mkrel 1
 Group:		Development/PHP
 URL:		http://www.php.net
