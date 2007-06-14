@@ -7,15 +7,13 @@ Summary:	Firebird database module for PHP
 Name:		php-%{modname}
 Epoch:		3
 Version:	5.2.3
-Release:	%mkrel 1
+Release:	%mkrel 2
 Group:		Development/PHP
 URL:		http://www.php.net
 License:	PHP License
 Source0:	%{modname}.ini
 BuildRequires:	php-devel = %{epoch}:%{version}
 BuildRequires:	firebird-devel
-Provides:	php5-firebird = %{version}-%{release}
-Obsoletes:	php5-firebird < %{version}-%{release}
 Provides:	php-interbase = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -29,6 +27,16 @@ database support.
 cp -dpR %{_usrsrc}/php-devel/extensions/%{dirname}/* .
 
 %build
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
+export FFLAGS="%{optflags}"
+
+%if %mdkversion >= 200710
+export CFLAGS="$CFLAGS -fstack-protector"
+export CXXFLAGS="$CXXFLAGS -fstack-protector"
+export FFLAGS="$FFLAGS -fstack-protector"
+%endif
+
 phpize
 %configure2_5x \
 	--with-libdir=%{_lib} \
@@ -41,7 +49,7 @@ mv modules/*.so .
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot} 
 
 install -D -m0755 %{soname} %{buildroot}%{_libdir}/php/extensions/%{soname}
-install -D -m0644 %{SOURCE0} %{buildroot}%{_sysconfdir}/php.d/42_firebird.ini
+install -D -m0644 %{SOURCE0} %{buildroot}%{_sysconfdir}/php.d/%{inifile}
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
@@ -51,5 +59,3 @@ install -D -m0644 %{SOURCE0} %{buildroot}%{_sysconfdir}/php.d/42_firebird.ini
 %doc CREDITS
 %config(noreplace) %attr(0644,root,root) %{_sysconfdir}/php.d/%{inifile}
 %attr(0755,root,root) %{_libdir}/php/extensions/%{soname}
-
-
