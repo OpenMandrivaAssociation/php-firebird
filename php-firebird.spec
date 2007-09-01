@@ -7,7 +7,7 @@ Summary:	Firebird database module for PHP
 Name:		php-%{modname}
 Epoch:		3
 Version:	5.2.3
-Release:	%mkrel 2
+Release:	%mkrel 3
 Group:		Development/PHP
 URL:		http://www.php.net
 License:	PHP License
@@ -27,15 +27,7 @@ database support.
 cp -dpR %{_usrsrc}/php-devel/extensions/%{dirname}/* .
 
 %build
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
-export FFLAGS="%{optflags}"
-
-%if %mdkversion >= 200710
-export CFLAGS="$CFLAGS -fstack-protector"
-export CXXFLAGS="$CXXFLAGS -fstack-protector"
-export FFLAGS="$FFLAGS -fstack-protector"
-%endif
+%serverbuild
 
 phpize
 %configure2_5x \
