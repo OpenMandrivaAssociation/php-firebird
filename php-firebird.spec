@@ -6,13 +6,13 @@
 Summary:	Firebird database module for PHP
 Name:		php-%{modname}
 Epoch:		3
-Version:	5.2.4
+Version:	5.2.5
 Release:	%mkrel 1
 Group:		Development/PHP
 URL:		http://www.php.net
 License:	PHP License
 Source0:	%{modname}.ini
-BuildRequires:	php-devel = %{epoch}:%{version}
+BuildRequires:	php-devel >= 3:5.2.0
 BuildRequires:	firebird-devel
 Provides:	php-interbase = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -42,6 +42,18 @@ mv modules/*.so .
 
 install -D -m0755 %{soname} %{buildroot}%{_libdir}/php/extensions/%{soname}
 install -D -m0644 %{SOURCE0} %{buildroot}%{_sysconfdir}/php.d/%{inifile}
+
+%post
+if [ -f /var/lock/subsys/httpd ]; then
+    %{_initrddir}/httpd restart >/dev/null || :
+fi
+
+%postun
+if [ "$1" = "0" ]; then
+    if [ -f /var/lock/subsys/httpd ]; then
+	%{_initrddir}/httpd restart >/dev/null || :
+    fi
+fi
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
