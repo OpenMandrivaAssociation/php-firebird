@@ -15,6 +15,7 @@ Source0:	%{modname}.ini
 BuildRequires:	php-devel >= 3:5.2.0
 BuildRequires:	firebird-devel
 Provides:	php-interbase = %{version}-%{release}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 This is a dynamic shared object (DSO) for PHP that will add Firebird
