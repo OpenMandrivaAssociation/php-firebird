@@ -6,8 +6,8 @@
 Summary:	Firebird database module for PHP
 Name:		php-%{modname}
 Epoch:		3
-Version:	5.2.5
-Release:	%mkrel 2
+Version:	5.2.6
+Release:	%mkrel 1
 Group:		Development/PHP
 URL:		http://www.php.net
 License:	PHP License
@@ -15,7 +15,7 @@ Source0:	%{modname}.ini
 BuildRequires:	php-devel >= 3:5.2.0
 BuildRequires:	firebird-devel
 Provides:	php-interbase = %{version}-%{release}
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 This is a dynamic shared object (DSO) for PHP that will add Firebird
