@@ -1,5 +1,4 @@
 %define modname firebird
-%define dirname interbase
 %define soname interbase.so
 %define inifile 42_%{modname}.ini
 
@@ -24,7 +23,7 @@ database support.
 %prep
 
 %setup -c -T
-cp -dpR %{_usrsrc}/php-devel/extensions/%{dirname}/* .
+cp -dpR %{_usrsrc}/php-devel/extensions/interbase/* .
 
 %build
 %serverbuild
