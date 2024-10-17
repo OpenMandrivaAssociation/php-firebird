@@ -8,7 +8,7 @@ Epoch:		3
 Version:	5.4.4
 Release:	2
 Group:		Development/PHP
-URL:		http://www.php.net
+URL:		https://www.php.net
 License:	PHP License
 Source0:	%{modname}.ini
 BuildRequires:	php-devel >= 3:5.2.0
