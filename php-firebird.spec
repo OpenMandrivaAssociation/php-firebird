@@ -11,6 +11,11 @@ Group:		Development/PHP
 URL:		https://www.php.net
 License:	PHP License
 Source0:	%{modname}.ini
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	php-devel >= 3:5.2.0
 BuildRequires:	firebird-devel
 Provides:	php-interbase = %{version}-%{release}
